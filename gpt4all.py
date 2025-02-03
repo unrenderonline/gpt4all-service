@@ -65,7 +65,7 @@ def generate_response(prompt, system_message, temperature):
     chat_session = data.get('chatSession', str(uuid.uuid4()))
     timestamp = datetime.now().isoformat()
     
-    with model.chat_session():
+    with model.chat_session(system_message=system_message):
         full_prompt = f"{system_message}\n{prompt}" if system_message else prompt
         response = model.generate(full_prompt, temp=temperature)
     
